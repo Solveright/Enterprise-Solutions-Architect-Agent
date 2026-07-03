@@ -1,84 +1,40 @@
-```mermaid
 flowchart LR
 
-%% ==========================
 %% User
-%% ==========================
-
 U([User])
 REQ[Customer Requirements]
 
 U --> REQ
 
-%% ==========================
-%% Local Development
-%% ==========================
+%% AI Agent
+AGENT[AI Solutions Architect Agent]
 
-subgraph LOCAL["Local Development"]
+REQ --> AGENT
 
-REQ --> AGENT[AI Solutions Architect Agent]
-
-PROMPT[System Prompt]
-TOOLS[Tool Registry]
-
-PROMPT --> AGENT
-TOOLS --> AGENT
-
-end
-
-%% ==========================
 %% Knowledge Sources
-%% ==========================
-
-subgraph KNOW["Knowledge Sources"]
-
-DOCS[Databricks Documentation]
-PATTERNS[Architecture Patterns]
-REF[Reference Architectures]
-
+subgraph KNOW["Knowledge Base"]
+KB[Databricks Documentation<br/>Architecture Patterns<br/>Reference Architectures]
 end
 
-%% ==========================
 %% Databricks Platform
-%% ==========================
-
-subgraph DBX["Databricks"]
-
+subgraph DBX["Databricks Platform"]
 VS[Vector Search]
-
-SQL[SQL Warehouse]
-
-UC[Unity Catalog]
-
-ML[MLflow Tracing]
-
+DATA[SQL Warehouse<br/>+ Unity Catalog]
+OBS[MLflow Tracing]
 end
 
-%% Build the vector index
-DOCS --> VS
-PATTERNS --> VS
-REF --> VS
-
-%% Agent runtime
-AGENT -->|Semantic Search| VS
+%% Knowledge Retrieval
+KB --> VS
 VS -->|Relevant Context| AGENT
 
-AGENT -->|SQL Queries| SQL
-SQL -->|Governed Access| UC
-SQL -->|Query Results| AGENT
+%% Platform Interaction
+AGENT -->|SQL Queries| DATA
+DATA -->|Results| AGENT
 
 %% Observability
-AGENT -->|Trace & Metrics| ML
+AGENT --> OBS
 
-%% ==========================
 %% Outputs
-%% ==========================
+AGENT --> OUT[Solution Recommendation]
 
-AGENT --> RESP[Solution Recommendation]
-
-RESP --> ARCH[Architecture Design]
-RESP --> ROADMAP[Implementation Roadmap]
-RESP --> RISK[Risk Assessment]
-RESP --> DISCOVERY[Discovery Questions]
-RESP --> SUMMARY[Executive Summary]
-```
+OUT --> DELIV[Architecture Design<br/>Implementation Roadmap<br/>Risk Assessment<br/>Discovery Questions<br/>Executive Summary]
