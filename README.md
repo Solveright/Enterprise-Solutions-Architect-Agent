@@ -1,41 +1,59 @@
 ```mermaid
-flowchart LR
+flowchart TD
 
+%% ==========================
 %% User
+%% ==========================
+
 U([User])
 REQ[Customer Requirements]
 
 U --> REQ
 
+%% ==========================
 %% AI Agent
-AGENT[AI Solutions Architect Agent]
+%% ==========================
 
-REQ --> AGENT
+REQ --> AGENT[AI Solutions Architect Agent]
 
-%% Knowledge Sources
+%% ==========================
+%% Knowledge & Platform
+%% ==========================
+
+subgraph PLATFORM["Databricks Platform"]
+
+direction LR
+
 subgraph KNOW["Knowledge Base"]
-KB[Databricks Documentation<br/>Architecture Patterns<br/>Reference Architectures]
+KB[Documentation<br/>Architecture Patterns<br/>Reference Architectures]
 end
 
-%% Databricks Platform
-subgraph DBX["Databricks Platform"]
+subgraph SERVICES["AI Services"]
 VS[Vector Search]
-DATA[SQL Warehouse<br/>+ Unity Catalog]
-OBS[MLflow Tracing]
+SQL[SQL Warehouse<br/>+ Unity Catalog]
+TRACE[MLflow Tracing]
 end
 
-%% Knowledge Retrieval
 KB --> VS
+
+end
+
 VS -->|Relevant Context| AGENT
+AGENT -->|SQL Queries| SQL
+SQL -->|Results| AGENT
+AGENT --> TRACE
 
-%% Platform Interaction
-AGENT -->|SQL Queries| DATA
-DATA -->|Results| AGENT
+%% ==========================
+%% Output
+%% ==========================
 
-%% Observability
-AGENT --> OBS
+AGENT --> SOL[Solution Recommendation]
 
-%% Outputs
-AGENT --> OUT[Solution Recommendation]
-OUT --> DELIV[Architecture Design<br/>Implementation Roadmap<br/>Risk Assessment<br/>Discovery Questions<br/>Executive Summary]
+SOL --> DELIVERABLES[
+Architecture Design<br/>
+Implementation Roadmap<br/>
+Risk Assessment<br/>
+Discovery Questions<br/>
+Executive Summary
+]
 ```
