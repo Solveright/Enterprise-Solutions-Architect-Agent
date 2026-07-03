@@ -41,7 +41,6 @@ end
 VS -->|Relevant Context| AGENT
 AGENT -->|SQL Queries| SQL
 SQL -->|Results| AGENT
-AGENT --> TRACE
 
 %% ==========================
 %% Output
