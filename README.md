@@ -68,7 +68,7 @@ SQL -->|Governed Access| UC
 SQL -->|Query Results| AGENT
 
 %% Observability
-AGENT -.->|Trace & Metrics| ML
+AGENT -->|Trace & Metrics| ML
 
 %% ==========================
 %% Outputs
