@@ -37,6 +37,5 @@ AGENT --> OBS
 
 %% Outputs
 AGENT --> OUT[Solution Recommendation]
-```
-
 OUT --> DELIV[Architecture Design<br/>Implementation Roadmap<br/>Risk Assessment<br/>Discovery Questions<br/>Executive Summary]
+```
